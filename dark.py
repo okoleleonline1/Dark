@@ -436,17 +436,6 @@ def show_all_approved_users(message):
         logger.error(f"Error handling /Show_all_approved_users command: {e}")
     finally:
         conn.close()
-
- Restart bot every 15 minutes
-def restart_bot():
-    while True:
-        time.sleep(15 * 60)  # Sleep for 15 minutes
-        try:
-            bot.stop_polling()
-            bot.polling(none_stop=True, interval=0)
-        except Exception as e:
-            logger.error(f"Error restarting bot: {e}")
-
  Start bot and restart thread
 if __name__ == '__main__':
     threading.Thread(target=restart_bot, daemon=True).start()
