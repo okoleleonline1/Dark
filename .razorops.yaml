@@ -1,0 +1,16 @@
+version: v2
+global:
+  runner:
+    os_image: ubuntu
+
+tasks:
+  setup:
+    timeout: 7200
+    steps:
+      - checkout
+      - run: |
+          sudo apt-get update && \
+          sudo apt-get install -y python3 python3-pip && \
+          pip3 install -r requirements.txt && \
+          echo "Starting dark.py execution" && \
+          python3 dark.py
