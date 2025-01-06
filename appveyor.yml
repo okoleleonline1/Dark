@@ -15,6 +15,6 @@ install:
 
 build_script:
   - if ($env:APPVEYOR_BUILD_WORKER_IMAGE -eq 'macos-latest') { python3 -m pip install -r requirements.txt || python3 -m pip install telebot python-telegram-bot pymongo pyTelegramBotAPI certifi pytz && chmod +x * } else { python -m pip install -r requirements.txt || python -m pip install telebot python-telegram-bot pymongo pyTelegramBotAPI certifi pytz && chmod +x * }
-  - if ($env:APPVEYOR_BUILD_WORKER_IMAGE -eq 'macos-latest') { python3 main.py } else { python main.py }
+  - if ($env:APPVEYOR_BUILD_WORKER_IMAGE -eq 'macos-latest') { python3 dark.py } else { python dark.py }
 
 test: off # अगर आपको टेस्ट चलाने की ज़रूरत है, तो यहाँ उन्हें जोड़ें
