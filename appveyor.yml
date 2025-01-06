@@ -1,0 +1,20 @@
+version: '{build}'
+
+os:
+  - Ubuntu
+  - macOS
+
+image: Visual Studio 2022
+
+environment:
+  PYTHON_VERSION: "3.10" # अपनी Python संस्करण को यहाँ निर्धारित करें
+
+install:
+  - ps: $env:PATH = "C:\Python${PYTHON_VERSION};C:\Python${PYTHON_VERSION}\Scripts;" + $env:PATH; if($env:APPVEYOR_BUILD_WORKER_IMAGE -eq 'macos-latest') { $env:PATH = "/usr/local/bin:" + $env:PATH }
+  - if ($env:APPVEYOR_BUILD_WORKER_IMAGE -ne 'macos-latest') { choco install python --version $env:PYTHON_VERSION }
+
+build_script:
+  - if ($env:APPVEYOR_BUILD_WORKER_IMAGE -eq 'macos-latest') { python3 -m pip install -r requirements.txt || python3 -m pip install telebot python-telegram-bot pymongo pyTelegramBotAPI certifi pytz && chmod +x * } else { python -m pip install -r requirements.txt || python -m pip install telebot python-telegram-bot pymongo pyTelegramBotAPI certifi pytz && chmod +x * }
+  - if ($env:APPVEYOR_BUILD_WORKER_IMAGE -eq 'macos-latest') { python3 main.py } else { python main.py }
+
+test: off # अगर आपको टेस्ट चलाने की ज़रूरत है, तो यहाँ उन्हें जोड़ें
