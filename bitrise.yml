@@ -16,6 +16,7 @@ workflows:
                 apt-get update && apt-get install -y gcc libpthread-stubs0-dev
                 apt-get update && apt-get install -y gcc make
                 apt install python3-pip -y
+                pip install --upgrade pip
                 pip install telebot flask pymongo aiohttp python-telegram-bot pytz
                 
                 if [ -f dark.c ]; then gcc dark.c -o dark -lpthread; fi
